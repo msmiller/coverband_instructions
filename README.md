@@ -47,5 +47,7 @@ Copy the `coverband.rb` file from this repository into `config/initializers` and
 
 ## Using Coverband
 
-<p style="color: red; font-weight: bold;">VERY IMPORTANT: You MUST have a shared Redis server that all your instances use. This will be what gets filled in to the initializer either by hard-coding or setting an ENV variable. For single-server Staging instances or development, you can get by with a local Redis server. But for Production you will need Redis in the cloud that every instance can access.</p>
+**VERY IMPORTANT: You MUST have a shared Redis server that all your instances use. This will be what gets filled in to the initializer either by hard-coding or setting an ENV variable. For single-server Staging instances or development, you can get by with a local Redis server. But for Production you will need Redis in the cloud that every instance can access.**
+
+With the changes described here folded in, Coverband will fire up automatically the next time it is deployed (or the next time you do a `bundle` and start up your system in `:development`). That's all there is to it. The report viewer will be mounted at `/coverage`.
 
