@@ -39,4 +39,13 @@ if defined?(Coverband::Reporters) == 'constant'
      mount Coverband::Reporters::Web.new, at: '/coverage'
   end
 end
-  ```
+```
+
+### config/initializers/coverband.rb
+
+Copy the `coverband.rb` file from this repository into `config/initializers` and make any changes you feel are needed. Probably the only change would be the Redis URL.
+
+## Using Coverband
+
+**<span style="color: red">VERY IMPORTANT:</span> You MUST have a shared Redis server that all your instances use. This will be what gets filled in to the initializer either by hard-coding or setting an ENV variable. For single-server Staging instances or development, you can get by with a local Redis server. But for Production you will need Redis in the cloud that every instance can access.**
+
