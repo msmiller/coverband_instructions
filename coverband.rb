@@ -1,4 +1,4 @@
-# .../config/initializers/coverband.rb
+# .../config/coverband.rb
 
 if defined?(Coverband::Reporters) == 'constant'
 
