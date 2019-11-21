@@ -2,6 +2,8 @@
 
 The method described here makes it as easy as possible to add Coverband coverage tracking. A few simple changes and additions, and the whole mechanism can be enabled and disabled by commenting out one line in the Gemfile and then pushing code to the instance.
 
+![Coverband](coverband.jpg "Coverband")
+
 ## Files Changed
 
 ### Gemfile
