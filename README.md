@@ -4,6 +4,8 @@ The method described here makes it as easy as possible to add Coverband coverage
 
 ![Coverband](coverband.jpg "Coverband")
 
+_Note that Coverband's "Views Tracker" will only record which views were rendered, not a line-by-line breakdown._
+
 ## Files Changed
 
 ### Gemfile
