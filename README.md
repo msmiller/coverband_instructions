@@ -63,5 +63,13 @@ Simply comment out the line in your Gemfile:
 
 ... and run Bundler and deploy. That's it. This means you can run coverage again at a later date (maybe after a few gazillion code changes) without much hassle.
 
+## Command Line
+
+You can control Coverband from the command line as long as you're local configuration is talking to the same Redis server.
+
+```bash
+rake coverband:clear     # clear saved coverage data
+rake coverband:coverage  # generate static html file report
+```
 
 
