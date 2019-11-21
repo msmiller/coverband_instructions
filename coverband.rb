@@ -10,7 +10,7 @@ if defined?(Coverband::Reporters) == 'constant'
 
     config.background_reporting_enabled = true
     # Add a wiggle (in seconds) to the background thread to avoid all your servers reporting at the same time:
-    config.reporting_wiggle = 30
+    # config.reporting_wiggle = 30 # Will be available in 4.2.4
 
     # # configure S3 integration
     # config.s3_bucket = 'coverband-demo'
