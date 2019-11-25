@@ -14,8 +14,16 @@ Add the following
 
 ```ruby
 group :production, :staging, :development do
-  gem 'coverband'
+  gem 'coverband', require: false
 end
+```
+
+### Application.rb
+
+Add the following after `Bundler.require(*Rails.groups)`. This will prevent Coverband from running during Rake tasks during deployments.
+
+```ruby
+require 'coverband' unless ($0 =~ /rake$/)
 ```
 
 ### config/routes.rb
