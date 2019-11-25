@@ -25,7 +25,7 @@ Note the `require:false`. This is handled in `application.rb` so as not to mess 
 Add the following after `Bundler.require(*Rails.groups)`. This will prevent Coverband from running during Rake tasks during deployments. Rake tasks may crash if Coverband can't connect to Redis, so this will work around the issue.
 
 ```ruby
-require 'coverband' unless ($0 =~ /rake$/)
+require 'coverband' if ( !($0 =~ /rake$/) && Gem.loaded_specs.has_key?('coverband') )
 ```
 
 ### config/routes.rb
