@@ -10,7 +10,7 @@ _Note that Coverband's "Views Tracker" will only record which views were rendere
 
 ### Gemfile
 
-Add the following
+Add the following:
 
 ```ruby
 group :production, :staging, :development do
@@ -18,7 +18,9 @@ group :production, :staging, :development do
 end
 ```
 
-### Application.rb
+Note the `require:false`. This is handled in `application.rb` so as not to mess up rake tasks.
+
+### application.rb
 
 Add the following after `Bundler.require(*Rails.groups)`. This will prevent Coverband from running during Rake tasks during deployments.
 
