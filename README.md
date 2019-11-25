@@ -18,7 +18,7 @@ group :production, :staging, :development do
 end
 ```
 
-Note the `require:false`. This is handled in `application.rb` so as not to mess up rake tasks.
+Note the `require:false`. This is handled in `application.rb` so as not to mess up rake tasks because it can't connect to Redis. If you're using a cloud-based Redis, then you can skip the `require:false` and the change to application.rb mentioned below. I think it's safer overall to do it this way because then you're running the same way on your desktop development as you are out on a server.
 
 ### application.rb
 
