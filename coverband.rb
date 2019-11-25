@@ -2,47 +2,53 @@
 
 if defined?(Coverband::Reporters) == 'constant'
 
-  Coverband.configure do |config|
-    config.store = Coverband::Adapters::RedisStore.new(Redis.new(url: ENV['MY_REDIS_URL']))
+  begin
+    # We need to catch Redis not being connected during things like Rake
+    Redis.current.ping
 
-    config.logger = Rails.logger
-    config.report_on_exit = false
+    Coverband.configure do |config|
+      # config.store = Coverband::Adapters::RedisStore.new(Redis.new(url: ENV['MY_REDIS_URL']))
 
-    config.background_reporting_enabled = true
-    # Add a wiggle (in seconds) to the background thread to avoid all your servers reporting at the same time:
-    # config.reporting_wiggle = 30 # Will be available in 4.2.4
+      config.logger = Rails.logger
+      config.report_on_exit = false
 
-    # # configure S3 integration
-    # config.s3_bucket = 'coverband-demo'
-    # config.s3_region = 'us-east-1'
-    # config.s3_access_key_id = ENV['AWS_ACCESS_KEY_ID']
-    # config.s3_secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
+      config.background_reporting_enabled = true
+      # Add a wiggle (in seconds) to the background thread to avoid all your servers reporting at the same time:
+      # config.reporting_wiggle = 30 # 4.2.4 and above
 
-    # config options false, true. (defaults to false)
-    # true and debug can give helpful and interesting code usage information
-    # and is safe to use if one is investigating issues in production, but it will slightly
-    # hit perf.
-    config.verbose = false
+      # # configure S3 integration
+      # config.s3_bucket = 'coverband-demo'
+      # config.s3_region = 'us-east-1'
+      # config.s3_access_key_id = ENV['AWS_ACCESS_KEY_ID']
+      # config.s3_secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
 
-    # default false. button at the top of the web interface which clears all data
-    config.web_enable_clear = true
+      # config options false, true. (defaults to false)
+      # true and debug can give helpful and interesting code usage information
+      # and is safe to use if one is investigating issues in production, but it will slightly
+      # hit perf.
+      config.verbose = false
 
-    # default false. Experimental support for tracking view layer tracking.
-    # Does not track line-level usage, only indicates if an entire file
-    # is used or not.
-    config.track_views = true
+      # default false. button at the top of the web interface which clears all data
+      config.web_enable_clear = true
 
-    config.ignore +=  ['config/application.rb',
-                       'config/boot.rb',
-                       'config/puma.rb',
-                       'config/schedule.rb',
-                       'config/*',
-                       'bin/*',
-                       'config/environments/*',
-                       'lib/tasks/*']
+      # default false. Experimental support for tracking view layer tracking.
+      # Does not track line-level usage, only indicates if an entire file
+      # is used or not.
+      config.track_views = true
 
+      config.ignore +=  ['config/application.rb',
+                         'config/boot.rb',
+                         'config/puma.rb',
+                         'config/schedule.rb',
+                         'config/*',
+                         'bin/*',
+                         'config/environments/*',
+                         'lib/tasks/*']
 
+    end
 
+  rescue Redis::CannotConnectError
+    p "Redis not found."
   end
 
 end # defined?(Coverband::Reporters)
