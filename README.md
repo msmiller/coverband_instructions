@@ -15,6 +15,7 @@ Add the following:
 ```ruby
 group :production, :staging, :development do
   gem 'coverband', require: false
+  gem 'redis' # If not installed elsewhere
 end
 ```
 
